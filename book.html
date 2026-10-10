@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Book &amp; Pay | VG Codeworks</title>
+<meta name="description" content="Book a VAG coding session or diagnostic scan and pay securely online by card, Apple Pay or Google Pay.">
+<meta name="theme-color" content="#080808">
+<!-- EDIT: replace the domain once purchased -->
+<link rel="canonical" href="https://www.vgcodeworks.co.uk/book.html">
+<meta property="og:title" content="Book &amp; Pay | VG Codeworks">
+<meta property="og:description" content="Book a VAG coding session or diagnostic scan and pay securely online by card, Apple Pay or Google Pay.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23080808'/%3E%3Ctext x='7' y='45' font-family='Arial Black,Arial' font-weight='900' font-style='italic' font-size='32' letter-spacing='-2' fill='%23fff'%3EVG%3C/text%3E%3Crect x='49' y='38' width='9' height='7' fill='%23d10000'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Chakra+Petch:ital,wght@1,700&family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo" aria-label="VG Codeworks home"><span class="logo-mark">VG<i></i></span><span class="logo-word">CODEWORKS</span></a>
+  <button class="menu-btn" aria-expanded="false" aria-controls="nav-links">Menu</button>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="services.html">Services</a></li>
+    <li><a href="remapping.html">Remapping</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="book.html" class="nav-cta" aria-current="page">Book Now</a></li>
+  </ul>
+</nav>
+
+<main>
+<header class="page-hero">
+  <div>
+    <div class="eyebrow">Book &amp; Pay</div>
+    <h1 class="hero-title">PICK A SLOT.<br><span class="r">PAY SECURELY.</span></h1>
+    <p class="hero-sub">Fixed-price jobs book and pay online in a couple of minutes. Retrofits and remaps start with a quote, then a deposit locks in your date.</p>
+    <div class="hero-actions"><a href="#sessions" class="btn btn-primary">Choose a Session</a><a href="contact.html" class="btn btn-ghost">Ask First</a></div>
+  </div>
+  <div class="hero-photo"><img src="images/garage-estate-lights.jpg" alt="Red Audi estate rear light cluster glowing in the dark" fetchpriority="high"></div>
+</header>
+
+<section class="bg-charcoal" id="sessions">
+  <div class="section-header reveal">
+    <p class="kicker">Sessions</p>
+    <h2 class="section-title">What Would You Like Booked?</h2>
+  </div>
+  <div class="book-grid">
+    <!-- EDIT: prices and durations here, and the booking links in main.js -->
+    <div class="book-card featured reveal">
+      <div class="book-meta"><span>CODING</span><span>~60 MIN</span></div>
+      <h3>Coding Session</h3>
+      <div class="book-price">£[PRICE]<small>paid at booking</small></div>
+      <ul>
+        <li>Full scan and backup of original settings</li>
+        <li>Your chosen features enabled</li>
+        <li>Everything reversible</li>
+      </ul>
+      <button class="btn btn-primary" data-book="coding">Book &amp; Pay</button>
+    </div>
+    <div class="book-card reveal">
+      <div class="book-meta"><span>DIAGNOSTICS</span><span>~45 MIN</span></div>
+      <h3>Diagnostic Scan</h3>
+      <div class="book-price">£[PRICE]<small>paid at booking</small></div>
+      <ul>
+        <li>All modules scanned</li>
+        <li>Faults explained in plain English</li>
+        <li>Written summary sent after</li>
+      </ul>
+      <button class="btn btn-primary" data-book="diagnostics">Book &amp; Pay</button>
+    </div>
+    <div class="book-card reveal">
+      <div class="book-meta"><span>RETROFIT / REMAP</span><span>QUOTED</span></div>
+      <h3>Secure Your Date</h3>
+      <div class="book-price">£[DEPOSIT]<small>deposit, off the final bill</small></div>
+      <ul>
+        <li>For jobs already quoted</li>
+        <li>Locks in your slot and parts order</li>
+        <li>Balance paid on completion</li>
+      </ul>
+      <button class="btn btn-ghost" data-book="deposit">Pay Deposit</button>
+    </div>
+  </div>
+  <div class="pay-trust reveal">
+    <span><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>Payments handled securely by Stripe</span>
+    <span><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Your card details never touch this site</span>
+    <!-- EDIT: your cancellation policy -->
+    <span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>Free rescheduling with [24h] notice</span>
+  </div>
+  <!-- EDIT: only list methods you've switched on in Stripe -->
+  <div class="pay-methods reveal" aria-label="Accepted payment methods">
+    <span>VISA</span><span>MASTERCARD</span><span>AMEX</span><span>APPLE PAY</span><span>GOOGLE PAY</span>
+  </div>
+</section>
+
+<section class="bg-black" id="faq">
+  <div class="section-header reveal">
+    <p class="kicker">FAQ</p>
+    <h2 class="section-title">Before You Book</h2>
+  </div>
+  <div class="faq-list reveal">
+    <details>
+      <summary>How can I pay?</summary>
+      <p>Card, Apple Pay or Google Pay through Stripe's secure checkout. Apple Pay and Google Pay appear automatically on devices that support them. Your card details go straight to Stripe and never touch this site.</p>
+    </details>
+    <details>
+      <summary>Can I reschedule or cancel?</summary>
+      <!-- EDIT: match your actual policy -->
+      <p>Yes. Reschedule free with at least [24 hours'] notice using the link in your confirmation email. Cancellations with less notice may not be refundable.</p>
+    </details>
+    <details>
+      <summary>Will coding void my warranty?</summary>
+      <p>Enabling factory features generally doesn't, but a manufacturer can decline a claim if they believe a change caused a fault. Coding is fully reversible and your original configuration is backed up, so it can be restored before a dealer visit.</p>
+    </details>
+    <details>
+      <summary>Do I need to tell my insurer?</summary>
+      <p>For a remap or a hardware retrofit, yes. Insurers class these as modifications and not declaring them can invalidate a policy. Most convenience coding isn't a modification, but if you're unsure, ask your insurer.</p>
+    </details>
+    <details>
+      <summary>What do I need to have ready?</summary>
+      <p>The car, both keys if possible, and a safe place to park. For longer jobs, off-road parking and access to the car for the full session is best.</p>
+    </details>
+    <details>
+      <summary>Do you do DPF, EGR or cat deletes?</summary>
+      <p>No. They're illegal on road cars in the UK and will fail an MOT. If your DPF or EGR is giving trouble, I can diagnose it properly so it gets fixed rather than removed.</p>
+    </details>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div>
+    <a href="index.html" class="logo" aria-label="VG Codeworks home"><span class="logo-mark">VG<i></i></span><span class="logo-word">CODEWORKS</span></a>
+    <div class="footer-tagline">VAG Coding · Retrofits · Remapping</div>
+  </div>
+  <ul class="footer-links">
+    <li><a href="services.html">Services</a></li>
+    <li><a href="remapping.html">Remapping</a></li>
+    <li><a href="book.html">Book</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <!-- EDIT: link to your Riclee Digital site -->
+  <div class="footer-copy">© <span class="yr"></span> VG Codeworks<br>Independent specialist. Not affiliated with Volkswagen AG or AUDI AG.<br>Designed &amp; built by <a href="#">Riclee Digital</a></div>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>
