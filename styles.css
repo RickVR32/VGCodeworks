@@ -282,3 +282,44 @@ footer { background: var(--black); border-top: 1px solid #1c1c1c; padding: 48px 
   .reveal { opacity: 1; transform: none; }
   html { scroll-behavior: auto; }
 }
+
+/* ── Contact channels ── */
+.contact-icon svg.fill { fill: #fff; stroke: none; }
+.channel-pick { border: none; margin: 0 0 4px; padding: 0; }
+.channel-pick legend { font-size: 0.68rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--grey); margin-bottom: 8px; }
+.channel-options { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.channel { position: relative; cursor: pointer; }
+.channel input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+.channel span {
+  display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 0 10px;
+  background: var(--black); border: 1px solid #2a2a2a; color: var(--light);
+  font-size: 0.82rem; font-weight: 600; letter-spacing: 0.5px; transition: border-color 0.2s, background 0.2s;
+}
+.channel span svg { width: 18px; height: 18px; flex-shrink: 0; fill: none; stroke: currentColor; stroke-width: 2; }
+.channel span svg.fill { fill: currentColor; stroke: none; }
+.channel:hover span { border-color: #444; }
+.channel input:checked + span { border-color: var(--red); background: rgba(209,0,0,0.12); color: var(--white); }
+.channel input:focus-visible + span { outline: 2px solid var(--red); outline-offset: 2px; }
+
+/* ── Discount code box ── */
+.code-box { display: flex; flex-direction: column; gap: 8px; max-width: 460px; margin-bottom: 48px; }
+.code-box label { font-size: 0.68rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--grey); }
+.code-row { display: flex; gap: 8px; }
+.code-row input { flex: 1; min-width: 0; background: var(--black); border: 1px solid #2a2a2a; color: var(--white); padding: 0 16px; height: 50px; font: 600 0.9rem var(--mono); letter-spacing: 2px; text-transform: uppercase; border-radius: 0; outline: none; }
+.code-row input:focus { border-color: var(--red); }
+.code-row .btn { padding: 0 24px; height: 50px; }
+.code-status { font-size: 0.82rem; color: #5ad17a; min-height: 1.2em; }
+#f-code { font-family: var(--mono); letter-spacing: 2px; text-transform: uppercase; }
+
+/* ── Promo bar ── */
+.promo-bar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 101; height: 38px;
+  display: flex; align-items: center; justify-content: center; gap: 8px; padding: 0 16px;
+  background: var(--red); color: #fff; font-size: 0.8rem; font-weight: 600; text-align: center;
+}
+.promo-bar button { background: #fff; color: var(--red); border: none; cursor: pointer; font: 700 0.76rem var(--mono); letter-spacing: 1.5px; padding: 4px 10px; min-height: 28px; }
+body.has-promo nav { top: 38px; }
+@media (max-width: 520px) {
+  .channel-options { grid-template-columns: 1fr; }
+  .promo-bar { font-size: 0.72rem; }
+}
