@@ -4,10 +4,10 @@
 // EDIT: your settings
 // ============================================================
 const CONTACT = {
-  email: 'hello@vgcodeworks.co.uk',
-  phoneDisplay: '07XXX XXXXXX',   // how the number is shown on the site
-  phoneIntl: '447000000000',      // same number, international format, no + or spaces (used for WhatsApp)
-  telegram: 'vgcodeworks'         // your Telegram username, without the @
+  email: 'v.gcodeworks@gmail.com', // swap for your domain address once it's set up
+  phoneDisplay: '07427 169493',    // how the number is shown on the site
+  phoneIntl: '447427169493',       // same number, international format, no + or spaces (used for WhatsApp)
+  telegram: ''                     // your Telegram username, without the @. Telegram options stay hidden while this is empty
 };
 
 // Paste your booking / payment links once your accounts are set up:
@@ -58,6 +58,11 @@ const io = 'IntersectionObserver' in window ? new IntersectionObserver(entries =
 document.querySelectorAll('.reveal').forEach(el => io ? io.observe(el) : el.classList.add('in'));
 
 // ── Contact links: fill every [data-link] from CONTACT ──
+if (!CONTACT.telegram) {
+  document.querySelectorAll('[data-link="telegram"]').forEach(a => { const row = a.closest('.contact-detail'); (row || a).remove(); });
+  document.querySelectorAll('input[name="channel"][value="telegram"]').forEach(r => r.closest('.channel').remove());
+  document.querySelectorAll('.channel-options').forEach(o => o.classList.add('two'));
+}
 const links = {
   phone: { href: 'tel:+' + CONTACT.phoneIntl, text: CONTACT.phoneDisplay },
   whatsapp: { href: 'https://wa.me/' + CONTACT.phoneIntl, text: CONTACT.phoneDisplay },

@@ -412,3 +412,17 @@ body.has-promo nav { top: 38px; }
 @media (max-width: 960px) {
   .contact, .plate-inner { grid-template-columns: minmax(0, 1fr); }
 }
+.channel-options.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (max-width: 520px) { .channel-options.two { grid-template-columns: 1fr; } }
+
+/* ── Legal pages ── */
+.legal-hero { padding: 150px 56px 56px; border-bottom: 2px solid var(--red); background: radial-gradient(ellipse at 85% 20%, rgba(209,0,0,0.16), transparent 55%), var(--black); }
+.legal-hero .hero-title { font-size: clamp(3rem, 7vw, 5.4rem); }
+.legal-body { max-width: 720px; }
+.legal-body h2 { font-family: 'Bebas Neue', sans-serif; font-weight: 400; font-size: 1.8rem; letter-spacing: 1px; margin: 40px 0 6px; }
+.legal-body h2:first-child { margin-top: 0; }
+.legal-body p, .legal-body li { color: var(--light); font-size: 0.96rem; line-height: 1.8; }
+.legal-body p { margin-top: 10px; }
+.legal-body ul { padding-left: 20px; margin-top: 10px; display: flex; flex-direction: column; gap: 6px; }
+.legal-body a, .privacy-note a { color: var(--white); border-bottom: 1px solid var(--red); text-decoration: none; }
+@media (max-width: 960px) { .legal-hero { padding: 120px 20px 40px; } }
