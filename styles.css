@@ -184,8 +184,7 @@ section { padding: 100px 56px; }
 .pay-trust { margin-top: 32px; display: flex; flex-wrap: wrap; gap: 14px 32px; align-items: center; font-size: 0.84rem; color: var(--grey); }
 .pay-trust span { display: inline-flex; align-items: center; gap: 8px; }
 .pay-trust svg { width: 18px; height: 18px; stroke: var(--red); fill: none; stroke-width: 2; flex-shrink: 0; }
-.pay-methods { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 18px; }
-.pay-methods span { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 1px; color: var(--light); border: 1px solid #333; padding: 7px 12px; }
+.pay-methods { margin-top: 18px; }
 
 /* Reviews */
 .reviews-wrap { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 24px; }
@@ -236,12 +235,15 @@ footer { background: var(--black); border-top: 1px solid #1c1c1c; padding: 48px 
 .footer-pay-label { display: flex; align-items: center; gap: 8px; font-size: 0.66rem; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: var(--grey); }
 .footer-pay-label svg { width: 14px; height: 14px; stroke: var(--red); fill: none; stroke-width: 2; }
 .pay-chips { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; }
-.pay-chip, .pay-methods span {
+.pay-card { display: block; width: 51px; height: 32px; border-radius: 4px; }
+.pay-chip {
   display: inline-flex; align-items: center; justify-content: center; gap: 5px;
-  height: 32px; min-width: 54px; padding: 0 10px;
-  background: #f4f4f2; color: #111; border-radius: 4px; border: none;
-  font-family: 'Inter', sans-serif; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.2px; white-space: nowrap;
+  width: 51px; height: 32px; background: #ffffff; border-radius: 4px;
 }
+.pay-chip img { display: block; height: 23px; width: auto; }
+.pay-chip.gpay img { height: 15px; }
+.pay-chip.klarna { background: #ffb3c7; width: auto; padding: 0 9px; font-family: 'Inter', sans-serif; font-size: 0.74rem; font-weight: 700; color: #0b051d; }
+.pay-chip.klarna img { height: 11px; }
 .footer-copy { font-size: 0.72rem; color: #7a7a7a; letter-spacing: 0.5px; line-height: 1.7; }
 .footer-copy a { color: var(--light); text-decoration: none; border-bottom: 1px solid var(--red); }
 .footer-copy a:hover { color: var(--red); }
