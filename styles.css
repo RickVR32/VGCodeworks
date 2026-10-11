@@ -231,9 +231,17 @@ form { display: flex; flex-direction: column; gap: 16px; }
 /* ── FOOTER ── */
 footer { background: var(--black); border-top: 1px solid #1c1c1c; padding: 48px 56px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 28px; }
 .footer-tagline { font-size: 0.66rem; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: var(--grey); margin-top: 14px; }
-.footer-links { display: flex; gap: 26px; list-style: none; flex-wrap: wrap; }
-.footer-links a { font-size: 0.74rem; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--grey); text-decoration: none; }
-.footer-links a:hover { color: var(--red); }
+/* Accepted payments */
+.footer-pay { display: flex; flex-direction: column; gap: 10px; }
+.footer-pay-label { display: flex; align-items: center; gap: 8px; font-size: 0.66rem; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: var(--grey); }
+.footer-pay-label svg { width: 14px; height: 14px; stroke: var(--red); fill: none; stroke-width: 2; }
+.pay-chips { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; }
+.pay-chip, .pay-methods span {
+  display: inline-flex; align-items: center; justify-content: center; gap: 5px;
+  height: 32px; min-width: 54px; padding: 0 10px;
+  background: #f4f4f2; color: #111; border-radius: 4px; border: none;
+  font-family: 'Inter', sans-serif; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.2px; white-space: nowrap;
+}
 .footer-copy { font-size: 0.72rem; color: #7a7a7a; letter-spacing: 0.5px; line-height: 1.7; }
 .footer-copy a { color: var(--light); text-decoration: none; border-bottom: 1px solid var(--red); }
 .footer-copy a:hover { color: var(--red); }
