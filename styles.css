@@ -426,3 +426,20 @@ body.has-promo nav { top: 38px; }
 .legal-body ul { padding-left: 20px; margin-top: 10px; display: flex; flex-direction: column; gap: 6px; }
 .legal-body a, .privacy-note a { color: var(--white); border-bottom: 1px solid var(--red); text-decoration: none; }
 @media (max-width: 960px) { .legal-hero { padding: 120px 20px 40px; } }
+
+/* ── Seasonal themes ── */
+.season-bar a { color: var(--white); font-weight: 700; text-decoration: underline; text-underline-offset: 3px; margin-left: 6px; white-space: nowrap; }
+.season-fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 60; }
+body[data-season="halloween"] { --red: #ff6a00; --red-bright: #ff8a33; }
+body[data-season="halloween"] .promo-bar { background: linear-gradient(90deg, #ff6a00, #c43d00); }
+body[data-season="halloween"] .hero::before, body[data-season="halloween"] .page-hero::before { box-shadow: inset 0 -120px 160px -80px rgba(255,106,0,0.35); }
+body[data-season="blackfriday"] .promo-bar { background: #ffd400; color: #0a0a0a; }
+body[data-season="blackfriday"] .promo-bar a { color: #0a0a0a; }
+body[data-season="blackfriday"] .promo-bar button { background: #0a0a0a; color: #ffd400; }
+body[data-season="christmas"] .promo-bar { background: linear-gradient(90deg, #b30000, #d10000 50%, #0f6b3a); }
+body[data-season="christmas"] .logo-mark i { background: #2ecc71; }
+body[data-season="easter"], body[data-season="summer"] { --red: #e8132b; --red-bright: #ff3a4f; }
+body[data-season="easter"] .promo-bar { background: linear-gradient(90deg, #e8132b, #d4307c); }
+body[data-season="summer"] .promo-bar { background: linear-gradient(90deg, #e8132b, #ff7a00); }
+body[data-season="summer"] .hero::before { box-shadow: inset 0 -140px 180px -90px rgba(255,140,0,0.28); }
+@media (prefers-reduced-motion: reduce) { .season-fx { display: none; } }

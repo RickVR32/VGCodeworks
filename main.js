@@ -1,39 +1,6 @@
 // VG Codeworks — shared script
 
-// ============================================================
-// EDIT: your settings
-// ============================================================
-const CONTACT = {
-  email: 'v.gcodeworks@gmail.com', // swap for your domain address once it's set up
-  phoneDisplay: '07427 169493',    // how the number is shown on the site
-  phoneIntl: '447427169493',       // same number, international format, no + or spaces (used for WhatsApp)
-  telegram: ''                     // your Telegram username, without the @. Telegram options stay hidden while this is empty
-};
-
-// Paste your booking / payment links once your accounts are set up:
-//   single / pack / unlock / diagnostics → paid events in your booking tool, or Stripe Payment Links
-//   deposit                              → a Stripe Payment Link
-// Leave a link empty and that button sends people to the contact form instead.
-const BOOKING_LINKS = {
-  single: '',       // Single Tweak £40
-  pack: '',         // VAG Tweak Pack £80
-  unlock: '',       // Full Unlock £120
-  diagnostics: '',  // Diagnostic Scan £50
-  deposit: ''       // Retrofit / remap deposit
-};
-
-// Your Cloudflare Worker address (see worker/SETUP.md). Leave '' until it's set up:
-// the plate checker and AI quick check then stay hidden/fall back, and enquiries still work.
-const API_BASE = '';
-
-// Promo banner shown at the top of every page. Set active: true to switch it on.
-// The code itself must also be created in Stripe (Products → Coupons → add a promotion code).
-const PROMO = {
-  active: false,
-  code: 'LAUNCH10',
-  text: '10% off your first booking'
-};
-// ============================================================
+// Settings live in config.js (loaded before this file).
 
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -116,6 +83,105 @@ if (PROMO.active && PROMO.code) {
   document.body.prepend(bar);
   document.body.classList.add('has-promo');
 }
+
+// ── Seasonal themes ──
+// Each season: date range, accent colour, banner and an optional effect. Banner wording can be edited here.
+const SEASONS = {
+  halloween: { banner: 'Spooky season: warning lights giving you a fright? Full diagnostic scan £50.', link: 'contact.html#fault', cta: 'Check a fault', effect: 'embers' },
+  blackfriday: { banner: 'Black Friday week', link: 'book.html', cta: 'Book now', effect: null },
+  christmas: { banner: 'Festive season: get your car coded before the holidays. Book early, slots go fast.', link: 'book.html', cta: 'Book a slot', effect: 'snow' },
+  easter: { banner: 'Easter road trip? A £50 health-check scan before you set off.', link: 'book.html', cta: 'Book a scan', effect: null },
+  summer: { banner: 'Summer road-trip ready: a full diagnostic scan before the long drive, £50.', link: 'book.html', cta: 'Book a scan', effect: null }
+};
+function easterSunday(y) { // Anonymous Gregorian algorithm
+  const a = y % 19, b = Math.floor(y / 100), c = y % 100, d = Math.floor(b / 4), e = b % 4, f = Math.floor((b + 8) / 25),
+    g = Math.floor((b - f + 1) / 3), h = (19 * a + b - d - g + 15) % 30, i = Math.floor(c / 4), k = c % 4,
+    l = (32 + 2 * e + 2 * i - h - k) % 7, m = Math.floor((a + 11 * h + 22 * l) / 451);
+  const month = Math.floor((h + l - 7 * m + 114) / 31), day = ((h + l - 7 * m + 114) % 31) + 1;
+  return new Date(Date.UTC(y, month - 1, day));
+}
+function seasonFor(now) {
+  const y = now.getFullYear(), d = new Date(Date.UTC(y, now.getMonth(), now.getDate()));
+  const D = (m, day, yr = y) => new Date(Date.UTC(yr, m - 1, day));
+  const between = (a, b) => d >= a && d <= b;
+  const nov1 = D(11, 1), firstFri = 1 + ((5 - nov1.getUTCDay() + 7) % 7), bf = D(11, firstFri + 21);
+  const bfStart = new Date(bf); bfStart.setUTCDate(bf.getUTCDate() - 4);
+  const bfEnd = new Date(bf); bfEnd.setUTCDate(bf.getUTCDate() + 3);
+  const easter = easterSunday(y), eStart = new Date(easter), eEnd = new Date(easter);
+  eStart.setUTCDate(easter.getUTCDate() - 12); eEnd.setUTCDate(easter.getUTCDate() + 1);
+  if (between(bfStart, bfEnd)) return 'blackfriday';
+  if (between(D(10, 15), D(11, 6))) return 'halloween';
+  if (between(D(12, 1), D(12, 31)) || between(D(1, 1), D(1, 2))) return 'christmas';
+  if (between(eStart, eEnd)) return 'easter';
+  if (between(D(6, 21), D(8, 31))) return 'summer';
+  return null;
+}
+(function applySeason() {
+  const forced = new URLSearchParams(location.search).get('season');
+  const setting = typeof SEASON === 'undefined' ? 'auto' : SEASON;
+  let season = null;
+  if (forced && (SEASONS[forced] || forced === 'off')) season = forced === 'off' ? null : forced;
+  else if (setting === 'auto') season = seasonFor(new Date());
+  else if (SEASONS[setting]) season = setting;
+  if (!season || document.body.dataset.noSeason !== undefined) return;
+  document.body.dataset.season = season;
+  const cfg = SEASONS[season];
+
+  // Banner (the launch promo banner wins if both are on)
+  if (!document.querySelector('.promo-bar')) {
+    const bar = document.createElement('div');
+    bar.className = 'promo-bar season-bar';
+    const words = document.createElement('span');
+    words.textContent = cfg.banner;
+    bar.appendChild(words);
+    const bfCode = typeof BLACK_FRIDAY_CODE === 'string' ? BLACK_FRIDAY_CODE : '';
+    if (season === 'blackfriday' && bfCode) {
+      words.textContent = 'Black Friday week: use code ';
+      const b = document.createElement('button');
+      b.type = 'button'; b.textContent = bfCode; b.setAttribute('aria-label', `Use code ${bfCode}`);
+      b.addEventListener('click', () => { setCode(bfCode); b.textContent = bfCode + ' ✓ applied'; });
+      bar.appendChild(b);
+    } else {
+      const a = document.createElement('a');
+      a.href = cfg.link; a.textContent = cfg.cta;
+      bar.appendChild(a);
+    }
+    document.body.prepend(bar);
+    document.body.classList.add('has-promo');
+  }
+
+  // Effect: light snowfall or rising embers, drawn on one canvas behind clicks
+  if (!cfg.effect || reduceMotion) return;
+  const canvas = document.createElement('canvas');
+  canvas.className = 'season-fx'; canvas.setAttribute('aria-hidden', 'true');
+  document.body.appendChild(canvas);
+  const ctx = canvas.getContext('2d');
+  let W = 0, H = 0, dpr = Math.min(window.devicePixelRatio || 1, 2);
+  const size = () => { W = canvas.width = innerWidth * dpr; H = canvas.height = innerHeight * dpr; };
+  size(); addEventListener('resize', size);
+  const n = Math.round(Math.min(70, innerWidth / 18));
+  const rnd = (a, b) => a + Math.random() * (b - a);
+  const parts = Array.from({ length: n }, () => ({ x: rnd(0, W), y: rnd(0, H), r: rnd(0.8, 2.6) * dpr, s: rnd(0.3, 1.1) * dpr, w: rnd(0, Math.PI * 2), a: rnd(0.35, 0.9) }));
+  const snow = cfg.effect === 'snow';
+  let last = 0;
+  (function frame(t) {
+    requestAnimationFrame(frame);
+    if (document.hidden || t - last < 33) return; // ~30fps is plenty
+    last = t;
+    ctx.clearRect(0, 0, W, H);
+    for (const p of parts) {
+      p.w += 0.02;
+      p.x += Math.sin(p.w) * 0.4 * dpr;
+      p.y += snow ? p.s : -p.s * 0.9;
+      if (snow && p.y > H + 5) { p.y = -5; p.x = rnd(0, W); }
+      if (!snow && p.y < -5) { p.y = H + 5; p.x = rnd(0, W); }
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = snow ? `rgba(255,255,255,${p.a * 0.8})` : `rgba(255,${Math.round(110 + 60 * Math.sin(p.w * 3))},20,${p.a * (0.6 + 0.4 * Math.sin(p.w * 5))})`;
+      ctx.fill();
+    }
+  })(0);
+})();
 
 // Book page code form
 document.querySelectorAll('[data-code-form]').forEach(f => f.addEventListener('submit', e => {
@@ -272,7 +338,14 @@ if (form) {
   });
 
   const channelLabel = { email: 'Email', whatsapp: 'WhatsApp', telegram: 'Telegram' };
-  const updateBtn = () => { sendBtn.textContent = 'Send via ' + channelLabel[form.channel.value]; };
+  // With the backend switched on, "Send to Ric now" goes straight to Ric's Telegram; without it, that option hides
+  const directOpt = form.querySelector('input[name="channel"][value="direct"]');
+  if (directOpt && !API_BASE) {
+    directOpt.closest('.channel').remove();
+    const wa = form.querySelector('input[name="channel"][value="whatsapp"]'); if (wa) wa.checked = true;
+    form.querySelector('.channel-options').classList.add('two');
+  }
+  const updateBtn = () => { sendBtn.textContent = form.channel.value === 'direct' ? 'Send to Ric' : 'Send via ' + channelLabel[form.channel.value]; };
   form.querySelectorAll('input[name="channel"]').forEach(r => r.addEventListener('change', updateBtn));
   updateBtn();
 
@@ -405,6 +478,28 @@ if (form) {
     if (lastAi) lines.push('', '(I ran the AI quick check on the website.)');
     const body = lines.join('\n');
     const channel = form.channel.value;
+
+    if (channel === 'direct') {
+      sendBtn.disabled = true; const label = sendBtn.textContent; sendBtn.textContent = 'Sending…';
+      try {
+        await api('/api/enquiry', {
+          mode, name: val('name'), contact: val('contact'), reg: cleanReg(val('reg')), car: val('car'),
+          service: val('service'), code: cleanCode(val('code')), message: val('message'),
+          codes: val('codes'), symptoms: val('symptoms'), part: val('part'),
+          wanted: val('wanted'), budget: val('budget'), needs: val('needs'),
+          photo: (mode === 'fault' || mode === 'part') ? photo : null, aiUsed: !!lastAi, website: form.website.value
+        });
+        status.style.color = '#5ad17a';
+        status.textContent = 'Sent. Ric has your message' + (photo ? ' and photo' : '') + ' and will reply on WhatsApp or by email, usually within a few hours.';
+        sendBtn.textContent = 'Sent ✓';
+        setTimeout(() => { sendBtn.disabled = false; sendBtn.textContent = label; }, 4000);
+      } catch (err) {
+        status.style.color = '#ff4d4d';
+        status.textContent = err.message + ' You can choose WhatsApp or Email below instead.';
+        sendBtn.disabled = false; sendBtn.textContent = label;
+      }
+      return;
+    }
 
     if (channel === 'whatsapp') {
       window.open('https://wa.me/' + CONTACT.phoneIntl + '?text=' + encodeURIComponent(body), '_blank', 'noopener');
