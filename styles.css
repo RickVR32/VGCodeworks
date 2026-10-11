@@ -77,6 +77,16 @@ section { padding: 100px 56px; }
 }
 .hero-inner { position: relative; z-index: 2; width: 100%; max-width: 760px; padding: 130px 56px 90px; }
 
+/* Moving photo layer (made by main.js) */
+.bg-move { position: absolute; inset: -3%; z-index: 0; background-size: cover; background-repeat: no-repeat; pointer-events: none;
+  will-change: transform; animation: bg-settle 7s ease-out both, bg-drift 24s ease-in-out 7s infinite alternate; }
+.page-hero.portrait .bg-move { background-size: auto 100%; }
+.img-band .bg-move { animation: bg-drift 24s ease-in-out infinite alternate; }
+.hero::before, .page-hero::before, .img-band::before { z-index: 1; }
+.img-band > .bg-move { position: absolute; z-index: 0; }
+@keyframes bg-settle { from { scale: 1.08; opacity: 0.4; } to { scale: 1; opacity: 1; } }
+@keyframes bg-drift { from { translate: 0 0; } to { translate: -2% -1%; } }
+
 /* ── INNER PAGE HERO: full-width background image ── */
 .page-hero {
   position: relative; min-height: 78vh; display: flex; align-items: center; overflow: hidden;
@@ -103,7 +113,7 @@ section { padding: 100px 56px; }
 /* ── IMAGE BAND: full-width section with a photo behind ── */
 .img-band { position: relative; padding: 110px 56px; background-color: var(--black); background-size: cover; background-repeat: no-repeat; display: flex; align-items: center; justify-content: space-between; gap: 40px; flex-wrap: wrap; overflow: hidden; }
 .img-band::before { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(8,8,8,0.94) 0%, rgba(8,8,8,0.78) 50%, rgba(120,0,0,0.55) 100%); }
-.img-band > * { position: relative; z-index: 1; }
+.img-band > * { position: relative; z-index: 2; }
 .band-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.4rem, 4vw, 4.4rem); line-height: 1; letter-spacing: 1px; }
 .band-title span { color: var(--red); }
 .band-sub { font-size: 0.92rem; color: rgba(255,255,255,0.8); margin-top: 12px; font-weight: 300; }
@@ -266,6 +276,7 @@ footer { background: var(--black); border-top: 1px solid #1c1c1c; padding: 48px 
   .hero-inner { padding: 120px 20px 64px; }
   .page-hero { min-height: 86vh; align-items: flex-end; padding: 120px 20px 64px; }
   .page-hero.portrait { background-size: cover; background-position: center !important; }
+  .page-hero.portrait .bg-move { background-size: cover; background-position: center !important; }
   .page-hero::before, .page-hero.portrait::before { background: linear-gradient(0deg, rgba(8,8,8,0.97) 0%, rgba(8,8,8,0.85) 45%, rgba(8,8,8,0.3) 100%); }
   .brands, section, .img-band, footer { padding-left: 20px; padding-right: 20px; }
   section, .img-band { padding-top: 72px; padding-bottom: 72px; }

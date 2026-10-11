@@ -4,6 +4,20 @@
 
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+// Moving hero images: the photo slowly settles in on load, then drifts, like the first version of the site.
+// The photo moves to its own layer so only the picture moves, never the text.
+document.querySelectorAll('.hero, .page-hero, .img-band').forEach(el => {
+  const img = el.style.backgroundImage;
+  if (!img) return;
+  const layer = document.createElement('div');
+  layer.className = 'bg-move';
+  layer.setAttribute('aria-hidden', 'true');
+  layer.style.backgroundImage = img;
+  layer.style.backgroundPosition = el.style.backgroundPosition || 'center';
+  el.style.backgroundImage = 'none';
+  el.prepend(layer);
+});
+
 // Footer year
 document.querySelectorAll('.yr').forEach(el => { el.textContent = new Date().getFullYear(); });
 
