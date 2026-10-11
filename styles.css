@@ -131,9 +131,11 @@ section { padding: 100px 56px; }
 .menu-col h3 { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; letter-spacing: 1px; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: baseline; }
 .menu-col h3 small { font-family: 'Inter'; font-size: 0.62rem; letter-spacing: 2px; color: var(--red); font-weight: 700; }
 .menu-list { list-style: none; }
-.menu-list li { display: flex; justify-content: space-between; gap: 12px; padding: 11px 0; border-bottom: 1px dashed #262626; font-size: 0.86rem; color: var(--light); }
+.menu-list li { display: flex; justify-content: space-between; align-items: flex-start; gap: 14px; padding: 12px 0; border-bottom: 1px dashed #262626; font-size: 0.88rem; color: var(--light); }
 .menu-list li:last-child { border-bottom: none; }
-.menu-list .price { font-family: var(--mono); font-size: 0.78rem; color: var(--grey); white-space: nowrap; }
+.menu-list li > span:first-child { display: flex; flex-direction: column; gap: 3px; }
+.menu-list li small { font-size: 0.75rem; color: var(--grey); line-height: 1.45; }
+.menu-list .price { font-family: var(--mono); font-size: 0.82rem; color: var(--white); white-space: nowrap; padding-top: 1px; }
 .menu-note { margin-top: 28px; font-size: 0.8rem; color: var(--grey); line-height: 1.7; }
 
 /* Stages */
@@ -176,6 +178,9 @@ section { padding: 100px 56px; }
 .book-card li { font-size: 0.86rem; color: var(--light); line-height: 1.5; display: flex; gap: 10px; }
 .book-card li::before { content: '//'; color: var(--red); font-weight: 700; font-size: 0.75rem; flex-shrink: 0; padding-top: 2px; }
 .book-card .btn { text-align: center; margin-top: 6px; }
+.book-flag { align-self: flex-start; background: var(--red); color: var(--white); font-size: 0.62rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; padding: 4px 10px; }
+.sub-head { font-family: 'Bebas Neue', sans-serif; font-weight: 400; font-size: 1.7rem; letter-spacing: 1px; color: var(--light); margin: 0 0 20px; }
+.book-grid + .sub-head { margin-top: 56px; }
 .pay-trust { margin-top: 32px; display: flex; flex-wrap: wrap; gap: 14px 32px; align-items: center; font-size: 0.84rem; color: var(--grey); }
 .pay-trust span { display: inline-flex; align-items: center; gap: 8px; }
 .pay-trust svg { width: 18px; height: 18px; stroke: var(--red); fill: none; stroke-width: 2; flex-shrink: 0; }

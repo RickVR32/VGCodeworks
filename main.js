@@ -6,13 +6,15 @@
 const ENQUIRY_EMAIL = 'hello@vgcodeworks.co.uk';
 
 // Paste your booking / payment links once your accounts are set up:
-//   coding / diagnostics → a paid event in your booking tool (Cal.com, Calendly etc. connected to Stripe)
-//   deposit              → a Stripe Payment Link
+//   single / pack / unlock / diagnostics → paid events in your booking tool (Cal.com, Calendly etc. connected to Stripe)
+//   deposit                              → a Stripe Payment Link
 // Leave a link empty and that button sends people to the contact form instead.
 const BOOKING_LINKS = {
-  coding: '',
-  diagnostics: '',
-  deposit: ''
+  single: '',       // Single Tweak £40
+  pack: '',         // VAG Tweak Pack £80
+  unlock: '',       // Full Unlock £120
+  diagnostics: '',  // Diagnostic Scan £50
+  deposit: ''       // Retrofit / remap deposit
 };
 // ============================================================
 
@@ -51,7 +53,9 @@ const form = document.getElementById('quote-form');
 if (form) {
   const status = document.getElementById('form-status');
   const serviceFor = {
-    coding: 'Coding / hidden features',
+    single: 'Coding / hidden features',
+    pack: 'Coding / hidden features',
+    unlock: 'Coding / hidden features',
     diagnostics: 'Diagnostics / fault finding',
     deposit: 'OEM retrofit',
     retrofit: 'OEM retrofit',
