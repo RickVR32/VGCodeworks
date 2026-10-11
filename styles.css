@@ -88,8 +88,12 @@ section { padding: 100px 56px; }
 @keyframes bg-drift { from { translate: 0 0; } to { translate: -2% -1%; } }
 
 /* Homepage coding terminal */
-.hero-grid { position: relative; z-index: 2; width: 100%; max-width: 1360px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 470px); gap: 40px; align-items: center; padding-right: 56px; }
-.hero-grid .hero-inner { padding-right: 0; }
+.session-section { background: radial-gradient(ellipse 60% 80% at 100% 50%, rgba(209,0,0,0.12), transparent 60%), var(--black); border-bottom: 1px solid #1a1a1a; }
+.session-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 520px); gap: 64px; align-items: center; }
+.session-list { list-style: none; margin-top: 28px; display: grid; gap: 14px; }
+.session-list li { position: relative; padding-left: 26px; color: #b5b5b5; font-size: 0.92rem; line-height: 1.65; }
+.session-list li::before { content: ''; position: absolute; left: 0; top: 0.55em; width: 11px; height: 8px; background: var(--red); }
+.session-list b { color: var(--white); font-weight: 600; }
 .term { background: rgba(10,10,10,0.86); border: 1px solid #262626; border-top: 3px solid var(--red); box-shadow: 0 30px 80px rgba(0,0,0,0.6); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
 .term-bar { display: flex; align-items: center; gap: 7px; padding: 14px 18px; border-bottom: 1px solid #222; font: 500 0.74rem 'JetBrains Mono', monospace; color: #9a9a9a; letter-spacing: 0.5px; }
 .term-bar span { flex: 1; }
@@ -99,9 +103,7 @@ section { padding: 100px 56px; }
 .term-body .g { color: #7a7a7a; } .term-body .ok { color: #2fd36b; } .term-body .r { color: #ff3030; }
 .term-cursor { display: inline-block; width: 0.6em; height: 1.05em; background: var(--red); vertical-align: -0.18em; animation: blink 1.1s steps(1) infinite; }
 @media (max-width: 960px) {
-  .hero-grid { grid-template-columns: 1fr; gap: 0; padding: 0 0 56px; align-self: flex-end; }
-  .hero-grid .hero-inner { padding-bottom: 36px; }
-  .term { margin: 0 20px; }
+  .session-inner { grid-template-columns: 1fr; gap: 36px; }
   .term-body { font-size: 0.74rem; }
 }
 
