@@ -18,6 +18,60 @@ document.querySelectorAll('.hero, .page-hero, .img-band').forEach(el => {
   el.prepend(layer);
 });
 
+// Homepage coding terminal: types out a coding session, then runs another one.
+(function () {
+  const out = document.querySelector('.term-body');
+  if (!out) return;
+  const g = t => ['g', t], w = t => ['', t], ok = t => ['ok', t];
+  const head = [
+    [g('> connecting via OBD-II...')],
+    [ok('interface OK · ignition ON')],
+    [w('> auto-scan: all modules')],
+    [w('01 Engine ............. '), ok('OK')],
+    [w('02 Transmission ....... '), ok('OK')],
+    [w('09 Central Elect ...... '), ok('OK')],
+    [w('17 Instruments ........ '), ok('OK')],
+    [g('> backup original coding... saved')],
+  ];
+  const sets = [
+    ['needle_sweep', 'comfort_windows'],
+    ['mirror_dip_reverse', 'start_stop_memory'],
+    ['drl_off_handbrake', 'ambient_colours'],
+  ];
+  const session = feats => head.concat(feats.map(f => [w('> enable: '), ['r', f]]), [[ok('coding accepted ✓')]]);
+  const esc = s => s.replace(/[&<>]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]));
+  const render = (lines, partial) => {
+    let html = lines.map(l => l.map(([c, t]) => c ? `<span class="${c}">${esc(t)}</span>` : esc(t)).join('')).join('\n');
+    if (partial) html += (html ? '\n' : '') + partial;
+    out.innerHTML = html + '<span class="term-cursor"></span>';
+  };
+  if (reduceMotion) { render(session(sets[0])); return; }
+
+  let visible = true;
+  if ('IntersectionObserver' in window) new IntersectionObserver(e => { visible = e[0].isIntersecting; }).observe(out);
+  const sleep = ms => new Promise(r => setTimeout(r, ms));
+  const waitVisible = async () => { while (!visible || document.hidden) await sleep(400); };
+
+  (async () => {
+    for (let n = 0; ; n++) {
+      const lines = session(sets[n % sets.length]), done = [];
+      render(done);
+      for (const line of lines) {
+        await waitVisible();
+        const typed = line[0][0] === '' && line[0][1].startsWith('>');
+        if (typed) {
+          // commands are typed out letter by letter
+          const text = line.map(p => p[1]).join('');
+          for (let i = 1; i <= text.length; i++) { render(done, esc(text.slice(0, i))); await sleep(28); }
+        }
+        done.push(line); render(done);
+        await sleep(typed ? 260 : line.length > 1 && line[1][0] === 'ok' ? 220 : 420);
+      }
+      await sleep(6000);
+    }
+  })();
+})();
+
 // Footer year
 document.querySelectorAll('.yr').forEach(el => { el.textContent = new Date().getFullYear(); });
 
