@@ -304,6 +304,11 @@ async function api(path, payload) {
   return data;
 }
 
+// Plate checker is hidden in the HTML until PLATE_CHECKER is switched on in config.js.
+if (typeof PLATE_CHECKER !== 'undefined' && PLATE_CHECKER) {
+  document.querySelectorAll('[data-plate-scope][hidden], [data-plate-check][hidden]').forEach(el => { el.hidden = false; });
+}
+
 // ── Number plate checker ──
 // Used on the homepage and the contact page. Without API_BASE it just carries the reg to the contact form.
 document.querySelectorAll('[data-plate-widget]').forEach(widget => {

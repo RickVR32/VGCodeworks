@@ -2,3 +2,7 @@ Payment logos
 - visa.svg, mastercard.svg, amex.svg: payment-icons by muffinresearch (MPL-2.0), https://github.com/muffinresearch/payment-icons
 - applepay.svg, googlepay.svg, klarna.svg: Simple Icons (CC0), https://simpleicons.org (viewBox cropped on Apple Pay / Google Pay)
 Logos are trademarks of their owners and are shown only to indicate accepted payment methods.
+
+Car brand logos (images/brands): Simple Icons 16.34.0 (https://simpleicons.org), CC0.
+The logos remain trademarks of their owners and are shown only to say which makes are covered.
+Cupra isn't in Simple Icons, so it's shown as text.

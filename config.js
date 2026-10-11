@@ -23,6 +23,10 @@ const BOOKING_LINKS = {
 // the plate checker and AI quick check then stay hidden/fall back, and enquiries still work.
 const API_BASE = '';
 
+// Number plate checker. Keep false until the DVSA API keys are in the Worker (see worker/SETUP.md),
+// then set true: the "Check your car" section shows on the homepage and the Check button on the contact page.
+const PLATE_CHECKER = false;
+
 // Promo banner shown at the top of every page. Set active: true to switch it on.
 // The code itself must also be created in Stripe (Products → Coupons → add a promotion code).
 const PROMO = {
