@@ -5,4 +5,4 @@ Logos are trademarks of their owners and are shown only to indicate accepted pay
 
 Car brand logos (images/brands): Simple Icons 16.34.0 (https://simpleicons.org), CC0.
 The logos remain trademarks of their owners and are shown only to say which makes are covered.
-Cupra isn't in Simple Icons, so it's shown as text.
+Cupra symbol (images/brands/cupra.svg): Wikimedia Commons "File:Cupra symbol.svg", public domain.
