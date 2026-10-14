@@ -284,6 +284,8 @@ footer { background: var(--black); border-top: 1px solid #1c1c1c; padding: 48px 
 .footer-copy { font-size: 0.72rem; color: #7a7a7a; letter-spacing: 0.5px; line-height: 1.7; }
 .footer-copy a { color: var(--light); text-decoration: none; border-bottom: 1px solid var(--red); }
 .footer-copy a:hover { color: var(--red); }
+.footer-copy .footer-legal a { color: inherit; border-bottom: 0; }
+.footer-copy .footer-legal a:hover { color: var(--white); }
 
 /* Reveal on scroll */
 .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.6s ease, transform 0.6s ease; }
